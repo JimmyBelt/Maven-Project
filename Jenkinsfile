@@ -1,6 +1,10 @@
 pipeline{
     agent {label "server1"}
 
+    tools{
+        maven 'mymaven'
+    }
+
     stages{
         stage('build'){
             steps{
