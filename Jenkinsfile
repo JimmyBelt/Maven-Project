@@ -1,22 +1,12 @@
-pipeline{
-    agent {label "server1"}
-
-    tools{
-        maven 'mymaven'
-    }
-
-    stages{
-        stage('build'){
-            steps{
-                bat 'mvn clean package'
-            }
-
-            post{
-                success{
-                    archiveArtifacts artifacts: '**/target/*.war'
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                sshagent(['jenkins_ssh_credential_id']) {
+                    git url: 'ssh://git@github.com/JimmyBelt/Maven-Project.git', branch: 'main'
                 }
             }
         }
-
     }
 }
