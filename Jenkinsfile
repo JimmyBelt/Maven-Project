@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                sshagent(['jenkins_ssh_credential_id']) {
+                withEnv(['GIT_SSH_COMMAND=C:\\Program Files\\Git\\usr\\bin\\ssh.exe -i C:\\Users\\jaime\\.ssh\\id_rsa -o StrictHostKeyChecking=no']) {
                     git url: 'ssh://git@github.com/JimmyBelt/Maven-Project.git', branch: 'main'
                 }
             }
